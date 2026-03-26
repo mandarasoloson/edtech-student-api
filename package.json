@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-   "type": "module",
+  "type": "module",
   "scripts": {
     "start": "node src/app/server.js",
     "dev": "node --watch src/app/server.js",
     "test": "vitest run",
     "test:watch": "vitest",
-    "lint": "eslint ."
+    "lint": "eslint src/ tests/"
   },
   "keywords": [],
   "author": "",

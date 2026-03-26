@@ -39,40 +39,40 @@ const validateStudent = (data, currentId = null) => {
 
 
 router.get('/stats', (req, res)=>{
-    if(students.length===0){
-        return res.json({totalStudents: 0, averageGrade: 0, studentsByField: {}, bestStudent: null});
-    }
+  if(students.length===0){
+    return res.json({totalStudents: 0, averageGrade: 0, studentsByField: {}, bestStudent: null});
+  }
 
-    const totalStudents = students.length;
-    const sumGrades = students.reduce((acc, s) => acc + s.grade, 0);
-    const averageGrade = parseFloat((sumGrades / totalStudents).toFixed(2));
+  const totalStudents = students.length;
+  const sumGrades = students.reduce((acc, s) => acc + s.grade, 0);
+  const averageGrade = parseFloat((sumGrades / totalStudents).toFixed(2));
 
-    const studentsByField = students.reduce((acc, s) => {
-        acc[s.field] = (acc[s.field] || 0) + 1;
-        return acc;
-    }, {});
+  const studentsByField = students.reduce((acc, s) => {
+    acc[s.field] = (acc[s.field] || 0) + 1;
+    return acc;
+  }, {});
 
-    const bestStudent = students.reduce((best, s) => (s.grade > best.grade ? s : best), students[0]);
+  const bestStudent = students.reduce((best, s) => (s.grade > best.grade ? s : best), students[0]);
 
-    res.json({ totalStudents, averageGrade, studentsByField, bestStudent });
+  res.json({ totalStudents, averageGrade, studentsByField, bestStudent });
 });
 
 router.get('/search', (req, res)=>{
-    const { q } = req.query;
-    if(!q || q.trim()=== ''){
-        return res.status(400).json({ error: 'Le paramètre de recherche q est requis' });
-    }
+  const { q } = req.query;
+  if(!q || q.trim()=== ''){
+    return res.status(400).json({ error: 'Le paramètre de recherche q est requis' });
+  }
 
-    const searchTerm=q.toLowerCase();
-    const results= students.filter(s=>
-        s.firstName.toLowerCase().includes(searchTerm) ||
+  const searchTerm=q.toLowerCase();
+  const results= students.filter(s=>
+    s.firstName.toLowerCase().includes(searchTerm) ||
         s.lastName.toLowerCase().includes(searchTerm)
-    );
-    res.json(results);
+  );
+  res.json(results);
 });
 
 router.get('/', (req, res)=>{
-    res.json(students);
+  res.json(students);
 });
 
 router.get('/:id', (req, res) => {
