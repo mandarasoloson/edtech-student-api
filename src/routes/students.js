@@ -2,7 +2,7 @@ import { Router } from "express";
 import {students} from "../data/bd.js";
 
 const router = Router();
-const validFields= ["Mathemarics", "Computer Science", "Physics", "Biology", "History"];
+const validFields= ["Informatique", "Mathématiques", "Physique", "Chimie"];
 
 const validateStudent = (data, currentId = null) => {
   const { firstName, lastName, email, grade, field } = data;
@@ -65,8 +65,8 @@ router.get('/search', (req, res)=>{
 
     const searchTerm=q.toLowerCase();
     const results= students.filter(s=>
-        s.firstname.toLowerCase().includes(searchTerm) ||
-        s.lastname.toLowerCase().includes(searchTerm)
+        s.firstName.toLowerCase().includes(searchTerm) ||
+        s.lastName.toLowerCase().includes(searchTerm)
     );
     res.json(results);
 });
