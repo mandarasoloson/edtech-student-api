@@ -93,7 +93,7 @@ router.post('/', (req, res) => {
   const newStudent = { id: newId, ...req.body };
   
   students.push(newStudent);
-  res.status(200).json(newStudent);
+  res.status(201).json(newStudent);
 });
 
 
