@@ -13,16 +13,23 @@ describe('API Students', () => {
   describe('GET /api/students', () => {
     
     // Test 1
-    it('1. Doit renvoyer 200 et un tableau', async () => {
+    it('1. Doit renvoyer 200 et un objet contenant le tableau dans "data"', async () => {
       const res = await request(app).get('/api/students');
       expect(res.status).toBe(200);
-      expect(Array.isArray(res.body)).toBe(true);
+      expect(Array.isArray(res.body.data)).toBe(true);
+      expect(res.body.info).toHaveProperty('totalStudents');
     });
 
     // Test 2
     it('2. Doit renvoyer tous les étudiants initiaux (5)', async () => {
       const res = await request(app).get('/api/students');
-      expect(res.body.length).toBe(5);
+      expect(res.body.data.length).toBe(5);
+    });
+
+    it('2bis. Doit limiter les résultats si le paramètre limit est présent', async () => {
+      const res = await request(app).get('/api/students?limit=2');
+      expect(res.body.data.length).toBe(2);
+      expect(res.body.info.currentPage).toBe(1);
     });
 
     // Test 3

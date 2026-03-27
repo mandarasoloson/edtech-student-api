@@ -72,7 +72,32 @@ router.get('/search', (req, res)=>{
 });
 
 router.get('/', (req, res)=>{
-  res.json(students);
+   //pagination
+  let page = parseInt(req.query.page);
+  if (isNaN(page) || page < 1) {
+    page = 1;
+  }
+  let limit = parseInt(req.query.limit);
+  if (isNaN(limit) || limit < 1) {
+    limit = 10;
+  } else if (limit > 100) {
+    limit = 100;
+  }
+
+  const startIndex=(page-1)*limit;
+  const endIndex=page*limit;
+
+  const results=students.slice(startIndex, endIndex);
+
+  res.status(200).json({
+    info: {
+      totalStudents: students.length,
+      totalPages: Math.ceil(students.length /limit),
+      currentPage: page,
+      limit: limit
+    },
+    data: results
+  });
 });
 
 router.get('/:id', (req, res) => {
