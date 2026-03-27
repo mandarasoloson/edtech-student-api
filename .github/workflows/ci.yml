@@ -32,3 +32,6 @@ jobs:
 
     - name: Lancement des Tests (Test)
       run: npm run test
+    
+    -name: Lancer les tests et afficher la couverture
+    run: npm run test:coverage
