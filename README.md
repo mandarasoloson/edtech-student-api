@@ -1,6 +1,6 @@
 # EdTech Student API - TP Intégration Continue
 
-![CI Status](https://github.com/mandarasoloson/edtexh-student-api/actions/workflows/ci.yml/badge.svg)
+![CI Status](https://github.com/mandarasoloson/edtech-student-api/actions/workflows/ci.yml/badge.svg)
 
 Ce projet est une API RESTful développée en Node.js et Express pour la gestion d'étudiants d'une école. Il a été réalisé dans le cadre d'un TP sur l'Intégration Continue (CI/CD). 
 
