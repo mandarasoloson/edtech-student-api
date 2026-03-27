@@ -25,11 +25,25 @@ describe('API Students', () => {
       const res = await request(app).get('/api/students');
       expect(res.body.data.length).toBe(5);
     });
-
+    
+    // Test 2bis
     it('2bis. Doit limiter les résultats si le paramètre limit est présent', async () => {
       const res = await request(app).get('/api/students?limit=2');
       expect(res.body.data.length).toBe(2);
       expect(res.body.info.currentPage).toBe(1);
+    });
+
+    // Test 2ter : Tri par note descendante
+    it('2ter.Doit trier les étudiants par note décroissante si sort=grade et order=desc', async () => {
+      const res = await request(app).get('/api/students?sort=grade&order=desc');
+      
+      expect(res.status).toBe(200);
+      expect(res.body.data.length).toBeGreaterThan(1);
+      
+      // On vérifie que la note du premier étudiant est supérieure ou égale à celle du deuxième
+      const firstStudentGrade = res.body.data[0].grade;
+      const secondStudentGrade = res.body.data[1].grade;
+      expect(firstStudentGrade).toBeGreaterThanOrEqual(secondStudentGrade);
     });
 
     // Test 3
