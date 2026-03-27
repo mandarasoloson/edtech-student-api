@@ -72,7 +72,7 @@ router.get('/search', (req, res)=>{
 });
 
 router.get('/', (req, res)=>{
-   //pagination
+  //pagination
   let page = parseInt(req.query.page);
   if (isNaN(page) || page < 1) {
     page = 1;
